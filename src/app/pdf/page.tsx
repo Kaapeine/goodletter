@@ -58,7 +58,9 @@ export default function Pdf() {
   useEffect(() => {
     const loadModule = async () => {
       const mod = await import('pdfjs-dist');
-      mod.GlobalWorkerOptions.workerSrc = window.location.origin + '/pdf.worker.mjs';
+      let str = String(window.location);
+      str = str.substring(0, str.lastIndexOf("/") + 1);
+      mod.GlobalWorkerOptions.workerSrc = str + '/pdf.worker.mjs';
       setPDFJs(mod);
     }
 
